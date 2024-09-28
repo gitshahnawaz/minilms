@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }} - Take Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            text-align: center;
+            color: #666;
+        }
+        .question-block {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        h4 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        label {
+            cursor: pointer;
+            color: #555;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ quiz.title }}</h1>
+        <p><strong>Course:</strong> {{ quiz.course.name }}</p>
+        <p><strong>Total Questions:</strong> {{ questions.count }}</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Loop through the questions -->
+            {% for question in questions %}
+                <div class="question-block">
+                    <h4>Question {{ forloop.counter }}: {{ question.question_text }}</h4>
+                    <ul>
+                        <li>
+                            <label>
+                                <input type="radio" name="question_{{ question.id }}" value="A" required>
+                                {{ question.option_a }}
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="question_{{ question.id }}" value="B">
+                                {{ question.option_b }}
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="question_{{ question.id }}" value="C">
+                                {{ question.option_c }}
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="question_{{ question.id }}" value="D">
+                                {{ question.option_d }}
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+            {% endfor %}
+            
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Questions</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align items to the top */
+            min-height: 100vh;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 600px; /* Card width */
+            margin-bottom: 40px; /* Space below the card */
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em; /* Increased font size */
+            background-color: #007BFF; /* Primary button color */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 20px; /* Space above button */
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        h3 {
+            margin-top: 40px; /* Space above existing questions section */
+            color: #333; /* Dark color for headings */
+        }
+        ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0; /* Remove padding */
+        }
+        li {
+            background-color: #f9f9f9; /* Light background for list items */
+            border: 1px solid #ccc; /* Border around items */
+            border-radius: 8px; /* Rounded corners */
+            padding: 15px; /* Padding for items */
+            margin-bottom: 10px; /* Space between list items */
+            transition: background-color 0.3s; /* Smooth background change */
+        }
+        li:hover {
+            background-color: #e0e0e0; /* Darker background on hover */
+        }
+        .empty-message {
+            text-align: center; /* Center the empty message */
+            color: #999; /* Light gray for empty message */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Add Questions to {{ quiz.title }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ question_form.as_p }}
+            <button type="submit">Add Question</button>
+        </form>
+    </div>
+
+    <h3>Existing Questions</h3>
+    <ul>
+        {% for question in questions %}
+            <li>
+                {{ question.question_text }} 
+                <br>
+                (A: {{ question.option_a }}, B: {{ question.option_b }}, C: {{ question.option_c }}, D: {{ question.option_d }}) 
+                <br>
+                Correct Answer: {{ question.correct_answer }}
+            </li>
+        {% empty %}
+            <li class="empty-message">No questions added yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

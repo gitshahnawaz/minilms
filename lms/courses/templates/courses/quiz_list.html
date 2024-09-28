@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9; /* Light background color */
+            margin: 0;
+            padding: 40px; /* Padding around the body */
+        }
+        .container {
+            max-width: 800px; /* Max width for the container */
+            margin: 0 auto; /* Center the container */
+            background-color: #fff; /* White background for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            padding: 20px; /* Padding for content */
+        }
+        h1 {
+            text-align: center; /* Center the title */
+            color: #333; /* Dark text color */
+            margin-bottom: 30px; /* Space below the title */
+        }
+        .quiz-list {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0; /* Remove padding */
+        }
+        .quiz-list li {
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 15px; /* Padding inside each quiz item */
+            margin-bottom: 15px; /* Space between quiz items */
+            background-color: #f8f8f8; /* Light background for quiz items */
+            transition: box-shadow 0.3s; /* Smooth shadow transition */
+        }
+        .quiz-list li:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+        }
+        h3 {
+            margin: 0 0 10px; /* Margin below quiz title */
+            color: #007BFF; /* Blue color for quiz titles */
+        }
+        p {
+            margin: 5px 0; /* Margin for paragraphs */
+            color: #555; /* Darker text color for details */
+        }
+        .btn {
+            display: inline-block; /* Inline block for buttons */
+            padding: 10px 15px; /* Padding for button */
+            background-color: #007BFF; /* Button background color */
+            color: white; /* White text */
+            text-decoration: none; /* Remove underline */
+            border-radius: 4px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        hr {
+            margin: 20px 0; /* Space for horizontal rule */
+            border: none; /* Remove default border */
+            border-top: 1px solid #ddd; /* Custom border */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Available Quizzes</h1>
+
+        <!-- Check if there are quizzes available -->
+        {% if quizzes %}
+            <ul class="quiz-list">
+                {% for quiz in quizzes %}
+                    <li>
+                        <h3>{{ quiz.title }}</h3>
+                        <p><strong>Course:</strong> {{ quiz.course.name }}</p>
+                        <p><strong>Created At:</strong> {{ quiz.created_at }}</p>
+                        
+                        <!-- Link to take the quiz -->
+                        <a href="{% url 'take_quiz' quiz.id %}" class="btn">Take Quiz</a>
+                    </li>
+                    <hr>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No quizzes are available at the moment.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

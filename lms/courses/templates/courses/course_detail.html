@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 600px; /* Set card width */
+            text-align: center; /* Center the text */
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #555; /* Gray color for description text */
+            font-size: 1.1em; /* Slightly larger font size for description */
+            line-height: 1.5; /* Improved line spacing */
+        }
+        a {
+            display: inline-block; /* Make link a block */
+            margin-top: 30px; /* Space above the link */
+            padding: 10px 20px; /* Padding for link */
+            background-color: #007BFF; /* Button color */
+            color: white; /* Text color */
+            border-radius: 5px; /* Rounded corners */
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s; /* Smooth background change */
+        }
+        a:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>{{ course.name }}</h2>
+        <p>{{ course.description }}</p>
+        <a href="{% url 'course_list' %}">Back to Course List</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px; /* Added margin for spacing */
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-direction: column; /* Changed to column for vertical stacking */
+            align-items: center; /* Centered items */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0; /* Increased margin for spacing */
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            background-color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            width: 250px; /* Set a fixed width for buttons */
+            text-align: center; /* Center text in button */
+        }
+        a:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Teacher's Dashboard</h1>
+    <h2>Welcome, {{ user.username }} sir!</h2>
+    <p>Here you can create courses, quizzes, and view reports.</p>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'create_course' %}">Create a Course</a></li>
+            <li><a href="{% url 'create_quiz' %}">Create a Quiz</a></li>
+            <li><a href="{% url 'fetch_api_quiz' %}">Create a Quiz with API</a></li>
+            <li><a href="{% url 'quiz_submissions' %}">View Quiz Submissions and Provide Feedback</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

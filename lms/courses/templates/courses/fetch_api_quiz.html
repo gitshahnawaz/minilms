@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Quiz</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9; /* Light background color */
+            margin: 0;
+            padding: 40px; /* Padding around the body */
+        }
+        h1 {
+            text-align: center; /* Center the title */
+            color: #333; /* Dark text color */
+            margin-bottom: 30px; /* Space below the title */
+        }
+        .container {
+            max-width: 600px; /* Max width for the form */
+            margin: 0 auto; /* Center the container */
+            background-color: #fff; /* White background for the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            padding: 20px; /* Padding for content */
+        }
+        label {
+            display: block; /* Block display for labels */
+            margin-bottom: 8px; /* Space below labels */
+            font-weight: bold; /* Bold labels */
+        }
+        input[type="text"], select {
+            width: 100%; /* Full width for inputs */
+            padding: 10px; /* Padding inside inputs */
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 4px; /* Rounded corners for inputs */
+            margin-bottom: 20px; /* Space below inputs */
+            font-size: 16px; /* Larger font size for readability */
+        }
+        button {
+            width: 100%; /* Full width for button */
+            padding: 10px; /* Padding inside button */
+            background-color: #007BFF; /* Button background color */
+            color: white; /* White text */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            font-size: 16px; /* Larger font size for button */
+            transition: background-color 0.3s; /* Smooth background color transition */
+        }
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .error-message {
+            color: red; /* Red color for error messages */
+            text-align: center; /* Center error messages */
+            margin-bottom: 20px; /* Space below error messages */
+        }
+        a {
+            display: block; /* Block display for the link */
+            text-align: center; /* Center the link */
+            margin-top: 20px; /* Space above the link */
+            color: #007BFF; /* Link color */
+            text-decoration: none; /* Remove underline */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Fetch Quiz from API</h1>
+
+    <div class="container">
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <label for="quiz_title">Quiz Title:</label>
+            <input type="text" name="quiz_title" required>
+
+            <label for="api_url">API URL:</label>
+            <input type="text" name="api_url" required>
+
+            <label for="course">Select Course:</label>
+            <select name="course" required>
+                <option value="">Select a course</option>
+                {% for course in courses %}
+                    <option value="{{ course.id }}">{{ course.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Create Quiz</button>
+        </form>
+
+        <a href="{% url 'teacher_dashboard' %}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

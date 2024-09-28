@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 800px; /* Max width for the list */
+            margin: 0 auto; /* Center the container */
+            background-color: #ffffff; /* White background for the container */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            padding: 20px; /* Padding for content */
+        }
+        ul {
+            list-style: none; /* Remove default bullet points */
+            padding: 0; /* Remove default padding */
+        }
+        li {
+            margin-bottom: 15px; /* Space between list items */
+        }
+        a {
+            text-decoration: none; /* Remove underline */
+            color: #007BFF; /* Link color */
+            font-weight: bold; /* Bold links */
+            transition: color 0.3s; /* Smooth color change */
+        }
+        a:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+        p {
+            text-align: center; /* Center text for empty state */
+            color: #555; /* Gray color for description text */
+        }
+    </style>
+</head>
+<body>
+    <h1>Courses</h1>
+
+    <div class="container">
+        {% if courses %}
+            <ul>
+                {% for course in courses %}
+                    <li><a href="{% url 'course_detail' course.id %}">{{ course.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No courses available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

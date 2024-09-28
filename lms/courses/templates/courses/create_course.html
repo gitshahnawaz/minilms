@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Course</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 500px; /* Card width */
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px); /* Subtle lift on hover */
+        }
+        button {
+            width: 100%;
+            padding: 12px; /* Button padding */
+            font-size: 1.1em; /* Increased font size */
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 1.1em; /* Increased font size */
+            margin-top: 10px;
+            text-align: center; /* Center the link */
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3; /* Darker blue on hover */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Space between form fields */
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            margin-top: 5px; /* Space above the input field */
+            box-sizing: border-box; /* Includes padding in width */
+        }
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+            height: 100px; /* Fixed height for textarea */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Create a New Course</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }} <!-- Keep the Django form variables intact -->
+            <button type="submit">Create Course</button>
+        </form>
+
+        <a href="{% url 'course_list' %}">Back to Courses</a>
+    </div>
+</body>
+</html>

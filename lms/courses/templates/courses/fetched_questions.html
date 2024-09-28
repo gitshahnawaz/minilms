@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetched Questions for {{ quiz.title }}</title>
+</head>
+<body>
+    <h1>Fetched Questions for Quiz: {{ quiz.title }}</h1>
+
+    {% if questions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Correct Answer</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                    <tr>
+                        <td>{{ question.question }}</td>
+                        <td>{{ question.correct_answer }}</td>
+                        <td>
+                            <ul>
+                                <li>{{ question.option_a }}</li>
+                                <li>{{ question.option_b }}</li>
+                                <li>{{ question.option_c }}</li>
+                                <li>{{ question.option_d }}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No questions were fetched from the API.</p>
+    {% endif %}
+
+    <a href="{% url 'teacher_dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
